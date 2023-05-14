@@ -45,28 +45,25 @@ export default function Signup() {
     const [form] = FormRemix.useForm();
 
     return (
-        <>
+        <FormRemix form={form} id="form-example">
             {JSON.stringify(errors)}
-            <h2>Antd</h2>
-            <FormRemix form={form} id="form-example">
-                <FormRemix.Item
-                    label="rod"
-                    name="rod"
-                    required
-                    rules={[{ required: true }]}
-                >
-                    <Input name="rod" title="rod" />
-                </FormRemix.Item>
-                <FormRemix.Item
-                    label="surname"
-                    name="surname"
-                    required
-                    rules={[{ required: true }]}
-                >
-                    <Input />
-                </FormRemix.Item>
-                <Button htmlType="submit">Submit</Button>
-            </FormRemix>
-        </>
+            <FormRemix.Item
+                label="Name"
+                name="name"
+                required
+                rules={[{ required: true }]}
+            >
+                <Input name="name" title="Name" />
+            </FormRemix.Item>
+            <FormRemix.Item
+                label="Surname"
+                name="surname"
+                required
+                rules={[{ required: true }]}
+            >
+                <Input name="surname" title="Surname" />
+            </FormRemix.Item>
+            <Button htmlType="submit">Submit</Button>
+        </FormRemix>
     );
 }
