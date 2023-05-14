@@ -33,7 +33,8 @@
         "public"
     ],
     "include": [
-        "remix.env.d.ts",
+        //"remix.env.d.ts",
+        "remix.config.ts",
         "**/*.ts",
         "**/*.tsx"
     ],

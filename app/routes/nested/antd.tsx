@@ -7,6 +7,8 @@ import { Form, useActionData, useSubmit } from '@remix-run/react';
 import type { FormInstance } from 'antd';
 import { Button, Form as FormAntd, Input } from 'antd';
 
+import FormRemix from '~/components/RemixForm';
+
 export async function action({ request }: ActionArgs) {
     const form = await request.formData();
 
@@ -39,43 +41,32 @@ export async function action({ request }: ActionArgs) {
 
 export default function Signup() {
     const errors = useActionData<typeof action>();
-    const submit = useSubmit();
 
-    const [form] = FormAntd.useForm();
+    const [form] = FormRemix.useForm();
 
     return (
         <>
             {JSON.stringify(errors)}
             <h2>Antd</h2>
-            <FormAntd
-                // action="/nested/internal"
-                form={form}
-                id="aa"
-                method="post"
-                onFinish={() => {
-                    submit(document.querySelector('#aa') as HTMLFormElement, {
-                        replace: true,
-                    });
-                }}
-            >
-                <FormAntd.Item
+            <FormRemix form={form} id="form-example">
+                <FormRemix.Item
                     label="rod"
                     name="rod"
                     required
                     rules={[{ required: true }]}
                 >
                     <Input name="rod" title="rod" />
-                </FormAntd.Item>
-                <FormAntd.Item
+                </FormRemix.Item>
+                <FormRemix.Item
                     label="surname"
                     name="surname"
                     required
                     rules={[{ required: true }]}
                 >
                     <Input />
-                </FormAntd.Item>
+                </FormRemix.Item>
                 <Button htmlType="submit">Submit</Button>
-            </FormAntd>
+            </FormRemix>
         </>
     );
 }

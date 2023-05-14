@@ -6,7 +6,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended",
-        "plugin:react/recommended",
+        "plugin:react/recommended"
     ],
     "plugins": [
         "eslint-plugin-import-helpers"
@@ -34,7 +34,9 @@
             }
         ],
         "react-hooks/exhaustive-deps": "off",
-        "react/react-in-jsx-scope": "off",
+        "react/jsx-sort-props": "error",
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off"
     },
     "settings": {
         "react": {

@@ -8,7 +8,7 @@ export const v2_meta: V2_MetaFunction = () => {
 export default function Index() {
     return (
         <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.4' }}>
-            NESTED
+            INDEX
             <Outlet />
         </div>
     );
