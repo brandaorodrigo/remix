@@ -1,0 +1,44 @@
+{
+    "extends": [
+        "@remix-run/eslint-config",
+        "@remix-run/eslint-config/node",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:react/recommended",
+    ],
+    "plugins": [
+        "eslint-plugin-import-helpers"
+    ],
+    "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "import-helpers/order-imports": [
+            "warn",
+            {
+                "alphabetize": {
+                    "ignoreCase": true,
+                    "order": "asc"
+                },
+                "groups": [
+                    "/^react/",
+                    "module",
+                    [
+                        "parent",
+                        "sibling",
+                        "index"
+                    ],
+                    "/~/"
+                ],
+                "newlinesBetween": "always"
+            }
+        ],
+        "react-hooks/exhaustive-deps": "off",
+        "react/react-in-jsx-scope": "off",
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
