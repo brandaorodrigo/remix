@@ -1,25 +1,20 @@
 import { css } from '@emotion/css';
 import type { ActionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Form, useActionData, useLoaderData } from '@remix-run/react';
+import {
+    Form,
+    useActionData,
+    useLoaderData,
+    useNavigation,
+} from '@remix-run/react';
 
-const formDataToJson = (data: FormData) => {
-    const keys = [...new Set(Array.from(data.keys()))];
-    const object = Object.fromEntries(
-        keys.map((key) => [
-            key,
-            data.getAll(key).length > 1 ? data.getAll(key) : data.get(key),
-        ])
-    );
-    return JSON.parse(JSON.stringify(object));
-};
+import { fetchJson, formDataToJson } from '~/utils/javascript';
 
 export const loader = async () => {
-    const data = {
-        game: 'The Legend Of Zelda',
-        title: 'Tears Of The Kingdom',
-    };
-    return json(data);
+    const response = await fetchJson(
+        'https://mospromo.spotmetrics.com/v1/CDLRMAES/api/pwa/config'
+    );
+    return json(response);
 };
 
 export const action = async ({ request }: ActionArgs) => {
@@ -31,6 +26,18 @@ export const action = async ({ request }: ActionArgs) => {
 export default function Component() {
     const loaderData = useLoaderData<typeof loader>();
     const actionData = useActionData<typeof action>();
+
+    const { state } = useNavigation();
+
+    /*
+    if (state === 'loading') {
+        return <div>Loading</div>;
+    }
+
+    if (state === 'submitting') {
+        return <div>Submitting</div>;
+    }
+    */
 
     return (
         <div
@@ -71,9 +78,20 @@ export default function Component() {
                     <input name="cover" type="file" />
                 </label>
                 <label>
-                    <button type="submit">Submit</button>
+                    <button disabled={state !== 'idle'} type="submit">
+                        Submit
+                    </button>
                 </label>
             </Form>
         </div>
+    );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+    return (
+        <>
+            <h1>Error</h1>
+            <pre>{error.message}</pre>
+        </>
     );
 }
